@@ -1,9 +1,8 @@
 name: Publish Docker image
 
+# Tour 27 fork: automatic publishing is disabled (upstream image would ship untested, non-gateway code).
+# Publishing is manual only; the Tour 27 gateway image is built by tour27-gateway-ci.yml.
 on:
-  push:
-    branches: [master]
-    tags: ["v*.*.*"]
   workflow_dispatch:
 
 # Two quick pushes to master must not race to overwrite the `latest` tag.

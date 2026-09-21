@@ -1,0 +1,21 @@
+# Tour 27 gateway only: no umami network, no nginx cache, no host-gateway alias.
+# Secrets come from the environment / an untracked env file; nothing secret lives in this file.
+name: tour27-osiris-gateway
+services:
+  gateway:
+    build:
+      context: ../..
+      dockerfile: deploy/tour27/Dockerfile
+    image: tour27-osiris-gateway:local
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${OSIRIS_PORT:-3000}:3000" # loopback only; expose through the reverse proxy
+    environment:
+      OSIRIS_DEPLOYMENT_MODE: tour27-gateway
+      OSIRIS_SERVICE_TOKEN: ${OSIRIS_SERVICE_TOKEN:?set a service token}
+      OSIRIS_SERVICE_TOKEN_NEXT: ${OSIRIS_SERVICE_TOKEN_NEXT:-}
+      NASA_FIRMS_MAP_KEY: ${NASA_FIRMS_MAP_KEY:-}
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]

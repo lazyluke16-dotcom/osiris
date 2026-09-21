@@ -1,0 +1,26 @@
+name: Tour 27 gateway CI
+
+on:
+  push:
+    branches: ["feature/tour27-**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx eslint src/lib/tour27 src/app/api/tour27 src/middleware.ts
+      - run: npx vitest run
+      - run: npm run build
+      - name: Build gateway image (not pushed)
+        run: docker build -f deploy/tour27/Dockerfile -t tour27-osiris-gateway:ci .
