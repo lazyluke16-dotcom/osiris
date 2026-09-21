@@ -1,0 +1,183 @@
+{
+  "contractVersion": "1.0",
+  "query": {
+    "latitude": 43.6532,
+    "longitude": -79.3832,
+    "earthquakes": { "radiusKm": 250, "minMagnitude": 2.5, "lookbackHours": 24 },
+    "fires": { "radiusKm": 100, "lookbackDays": 1 },
+    "environmentalEvents": { "radiusKm": 500, "lookbackDays": 30 },
+    "forecast": { "forecastHours": 24 }
+  },
+  "generatedAt": "2026-09-21T00:00:00.000Z",
+  "observations": {
+    "earthquakes": {
+      "status": "ok",
+      "data": {
+        "events": [
+          {
+            "id": "us7000synthetic",
+            "type": "earthquake",
+            "title": "M 3.1 - synthetic test event",
+            "latitude": 43.7,
+            "longitude": -79.4,
+            "occurredAt": "2026-09-20T23:00:00.000Z",
+            "updatedAt": "2026-09-20T23:30:00.000Z",
+            "source": "USGS",
+            "sourceUrl": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000synthetic",
+            "details": {
+              "place": "5 km N of Synthetic",
+              "magnitude": 3.1,
+              "magnitudeType": "ml",
+              "depthKm": 8.5,
+              "tsunami": false,
+              "alert": null,
+              "significance": 148,
+              "status": "reviewed",
+              "feltReports": 12
+            }
+          }
+        ],
+        "source": "USGS",
+        "generatedAt": "2026-09-21T00:00:00.000Z",
+        "stale": false
+      }
+    },
+    "fires": {
+      "status": "ok",
+      "data": { "events": [], "source": "NASA_FIRMS", "generatedAt": "2026-09-21T00:00:00.000Z", "stale": false }
+    }
+  },
+  "forecast": {
+    "status": "ok",
+    "data": {
+      "source": "MET_NORWAY",
+      "generatedAt": "2026-09-21T00:00:00.000Z",
+      "providerUpdatedAt": "2026-09-20T23:00:00Z",
+      "stale": false,
+      "attribution": "Data from MET Norway",
+      "location": { "latitude": 43.6532, "longitude": -79.3832 },
+      "forecast": [
+        {
+          "time": "2026-09-21T01:00:00Z",
+          "airTemperatureC": 11.2,
+          "relativeHumidityPercent": 81,
+          "airPressureAtSeaLevelHpa": 1016.4,
+          "cloudAreaFractionPercent": 40,
+          "windSpeedMps": 3.1,
+          "windFromDirectionDegrees": 220,
+          "windGustMps": 6.2,
+          "symbolCode": "partlycloudy_night",
+          "precipitationAmountMm": 0,
+          "precipitationPeriodHours": 1,
+          "probabilityOfPrecipitationPercent": 5,
+          "probabilityOfThunderPercent": 0
+        }
+      ]
+    }
+  },
+  "environmentalEvents": {
+    "status": "ok",
+    "data": {
+      "source": "NASA_EONET",
+      "generatedAt": "2026-09-21T00:00:00.000Z",
+      "stale": false,
+      "degraded": false,
+      "informationalOnly": true,
+      "attribution": "Event metadata from NASA EONET (Earth Observatory Natural Event Tracker)",
+      "disclaimer": "Informational context only, provided for visualisation and general information. Event locations and extents may be approximate. This is not an official warning and no severity, risk or emergency status is implied. Not endorsed by NASA.",
+      "query": { "latitude": 43.6532, "longitude": -79.3832, "radiusKm": 500, "lookbackDays": 30 },
+      "events": []
+    }
+  },
+  "officialWarnings": [
+    {
+      "provider": "NWS",
+      "result": {
+        "status": "ok",
+        "data": {
+          "source": "NOAA_NWS",
+          "authority": { "id": "NWS", "name": "NOAA National Weather Service", "country": "US" },
+          "officialWarnings": true,
+          "generatedAt": "2026-09-21T00:00:00.000Z",
+          "providerUpdatedAt": null,
+          "coverage": "outside-coverage",
+          "attribution": "Alerts issued by the U.S. National Weather Service (NOAA)",
+          "disclaimer": "Official alerts are reproduced as issued by the authority; Tour 27 does not create, upgrade, downgrade or reinterpret them. The absence of an alert does not mean there is no hazard, and an alert may lag the authority by a short time. Always follow the instructions of local authorities. Not endorsed by the issuing authority.",
+          "query": { "latitude": 43.6532, "longitude": -79.3832 },
+          "alerts": []
+        }
+      }
+    },
+    {
+      "provider": "ECCC",
+      "result": {
+        "status": "ok",
+        "data": {
+          "source": "ECCC",
+          "authority": { "id": "ECCC", "name": "Environment and Climate Change Canada (Meteorological Service of Canada)", "country": "CA" },
+          "officialWarnings": true,
+          "generatedAt": "2026-09-21T00:00:00.000Z",
+          "providerUpdatedAt": null,
+          "coverage": "covered",
+          "attribution": "Source: Environment and Climate Change Canada. Contains information licensed under the Open Government Licence – Canada.",
+          "disclaimer": "Official alerts are reproduced as issued by the authority; Tour 27 does not create, upgrade, downgrade or reinterpret them. The absence of an alert does not mean there is no hazard, and an alert may lag the authority by a short time. Always follow the instructions of local authorities. Not endorsed by the issuing authority.",
+          "query": { "latitude": 43.6532, "longitude": -79.3832 },
+          "alerts": [
+            {
+              "id": "1519475351647681356202609190503_fea1-1278",
+              "authority": { "id": "ECCC", "name": "Environment and Climate Change Canada (Meteorological Service of Canada)", "country": "CA" },
+              "sourceUrl": null,
+              "status": null,
+              "messageType": null,
+              "scope": null,
+              "categories": [],
+              "event": "frost advisory",
+              "urgency": null,
+              "severity": null,
+              "certainty": null,
+              "responseTypes": [],
+              "sender": null,
+              "senderName": null,
+              "headline": null,
+              "description": "Synthetic English text.",
+              "instruction": null,
+              "language": "en-CA",
+              "translations": [
+                { "language": "fr-CA", "event": "avis de gel", "headline": null, "description": "Texte francais synthetique.", "instruction": null, "areaDescription": "zone" }
+              ],
+              "sent": "2026-09-20T13:21:00.000Z",
+              "effective": "2026-09-20T13:21:00.000Z",
+              "onset": null,
+              "expires": "2026-09-21T05:21:33.732Z",
+              "ends": "2026-09-21T14:00:00.000Z",
+              "validUntil": "2026-09-21T14:00:00.000Z",
+              "validUntilBasis": "ends",
+              "areas": [
+                {
+                  "description": "Zone",
+                  "geocodes": {},
+                  "geometry": { "type": "Polygon", "coordinates": [[[-79.5, 43.6], [-79.3, 43.6], [-79.3, 43.7], [-79.5, 43.7], [-79.5, 43.6]]] },
+                  "regionLinks": []
+                }
+              ],
+              "references": [],
+              "parameters": { "identifier_scheme": ["ECCC-GeoMet-feature-id"], "risk_colour": ["yellow"] },
+              "eventCodes": {},
+              "note": null
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "providers": [
+    { "provider": "USGS", "capability": "earthquakes", "truthClass": "OBSERVATION", "state": "HEALTHY", "requiredSecret": null, "licenceStatus": "OPEN (attribution per USGS terms)", "lastSuccessAt": "2026-09-21T00:00:00.000Z", "lastFailureAt": null, "freshnessSeconds": 0 },
+    { "provider": "NASA_FIRMS", "capability": "thermal-detections", "truthClass": "OBSERVATION", "state": "HEALTHY", "requiredSecret": "NASA_FIRMS_MAP_KEY", "licenceStatus": "OPEN (NASA data policy; MAP_KEY registration)", "lastSuccessAt": "2026-09-21T00:00:00.000Z", "lastFailureAt": null, "freshnessSeconds": 0 },
+    { "provider": "NASA_EONET", "capability": "environmental-events", "truthClass": "ENVIRONMENTAL_CONTEXT", "state": "HEALTHY", "requiredSecret": null, "licenceStatus": "OPEN (attribution)", "lastSuccessAt": "2026-09-21T00:00:00.000Z", "lastFailureAt": null, "freshnessSeconds": 0 },
+    { "provider": "MET_NORWAY", "capability": "forecast", "truthClass": "FORECAST", "state": "HEALTHY", "requiredSecret": null, "licenceStatus": "OPEN (attribution \"Data from MET Norway\"; honest User-Agent required)", "lastSuccessAt": "2026-09-21T00:00:00.000Z", "lastFailureAt": null, "freshnessSeconds": 0 },
+    { "provider": "NWS", "capability": "official-warnings-us", "truthClass": "OFFICIAL_WARNING", "state": "HEALTHY", "requiredSecret": null, "licenceStatus": "OPEN (US Government; honest User-Agent required)", "lastSuccessAt": "2026-09-21T00:00:00.000Z", "lastFailureAt": null, "freshnessSeconds": 0 },
+    { "provider": "ECCC", "capability": "official-warnings-ca", "truthClass": "OFFICIAL_WARNING", "state": "HEALTHY", "requiredSecret": null, "licenceStatus": "OPEN (Open Government Licence - Canada; attribution)", "lastSuccessAt": "2026-09-21T00:00:00.000Z", "lastFailureAt": null, "freshnessSeconds": 0 },
+    { "provider": "BOM", "capability": "official-warnings-au", "truthClass": "OFFICIAL_WARNING", "state": "LICENCE_PENDING", "requiredSecret": null, "licenceStatus": "LICENCE_PENDING (commercial licence not yet obtained)", "lastSuccessAt": null, "lastFailureAt": null, "freshnessSeconds": null },
+    { "provider": "METEOALARM", "capability": "official-warnings-eu", "truthClass": "OFFICIAL_WARNING", "state": "TOKEN_PENDING", "requiredSecret": "METEOALARM_API_TOKEN", "licenceStatus": "TOKEN_PENDING (API token not yet issued; applicability unproven)", "lastSuccessAt": null, "lastFailureAt": null, "freshnessSeconds": null }
+  ]
+}

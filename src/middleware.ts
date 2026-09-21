@@ -1,9 +1,35 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest, NextFetchEvent } from 'next/server';
+import {
+  evaluateGatewayRequest,
+  GATEWAY_MODE_ENV,
+  GATEWAY_MODE_VALUE,
+  SERVICE_TOKEN_ENV,
+  SERVICE_TOKEN_NEXT_ENV,
+} from '@/lib/tour27/gateway-guard';
 
 export function middleware(request: NextRequest, event: NextFetchEvent) {
   const url = request.nextUrl.pathname;
-  
+
+  /* Tour 27 gateway deployment mode: deny-by-default allow-list + service bearer token, and NO
+     analytics (visitor IPs are never forwarded anywhere). Outside this mode nothing below changes. */
+  if (process.env[GATEWAY_MODE_ENV] === GATEWAY_MODE_VALUE) {
+    const decision = evaluateGatewayRequest({
+      mode: process.env[GATEWAY_MODE_ENV],
+      method: request.method,
+      pathname: url,
+      authorization: request.headers.get('authorization'),
+      tokens: [process.env[SERVICE_TOKEN_ENV], process.env[SERVICE_TOKEN_NEXT_ENV]],
+    });
+    if (decision.action === 'deny') {
+      return NextResponse.json({ error: decision.error }, { status: decision.status, headers: { 'Cache-Control': 'no-store' } });
+    }
+    return NextResponse.next();
+  }
+
+  /* Normal mode: API routes were never matched before this guard existed; keep them analytics-free. */
+  if (url.startsWith('/api/')) return NextResponse.next();
+
   const ip = request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '127.0.0.1';
   const userAgent = request.headers.get('user-agent') || 'Unknown OSIRIS Client';
   
@@ -54,6 +80,7 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
    map's critical path. Analytics wants page views; asset fetches are not one. */
 export const config = {
   matcher: [
+    '/api/:path*',
     '/((?!api|_next/static|_next/image|vendor|favicon.ico|sitemap.xml|robots.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mjs|js|css|json|pbf|mvt|woff|woff2|ico|txt)$).*)',
   ],
 }
