@@ -1,4 +1,6 @@
 import { DestinationIntelligenceGateway, type GatewayProviders } from './gateway';
+import { createEcccProvider } from './providers/eccc';
+import { createNwsProvider } from './providers/nws';
 import { consoleLogger, MemoryCache, type ProviderDeps } from './runtime';
 
 /** Real dependencies for the running server. Tests build their own gateway with fakes. */
@@ -12,9 +14,12 @@ export function buildDefaultDeps(): ProviderDeps {
   };
 }
 
-export function buildDefaultProviders(_deps: ProviderDeps): GatewayProviders {
+export function buildDefaultProviders(deps: ProviderDeps): GatewayProviders {
   // Provider ports are registered here as they land (each with its own test suite).
-  return {};
+  return {
+    nws: createNwsProvider(deps),
+    eccc: createEcccProvider(deps),
+  };
 }
 
 let singleton: DestinationIntelligenceGateway | null = null;
