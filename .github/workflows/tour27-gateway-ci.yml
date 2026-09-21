@@ -24,3 +24,18 @@ jobs:
       - run: npm run build
       - name: Build gateway image (not pushed)
         run: docker build -f deploy/tour27/Dockerfile -t tour27-osiris-gateway:ci .
+      - name: Container smoke (read-only fs, tmpfs, restart, log scan)
+        run: |
+          TOKEN="$(openssl rand -hex 32)"
+          echo "::add-mask::$TOKEN"
+          docker run -d --name gw --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges:true \
+            -e OSIRIS_DEPLOYMENT_MODE=tour27-gateway -e OSIRIS_SERVICE_TOKEN="$TOKEN" -p 127.0.0.1:3000:3000 tour27-osiris-gateway:ci
+          export BASE_URL=http://127.0.0.1:3000 OSIRIS_SERVICE_TOKEN="$TOKEN" SMOKE_TARGET=url
+          node deploy/tour27/smoke.mjs
+          docker restart gw
+          node deploy/tour27/smoke.mjs
+          docker logs gw > "$RUNNER_TEMP/gw.log" 2>&1
+          LOG_FILE="$RUNNER_TEMP/gw.log" node deploy/tour27/smoke.mjs
+          docker inspect --format '{{.State.Health.Status}}' gw
+      - name: Gateway docs are not stale
+        run: npx vitest run src/lib/tour27/provider-docs.test.ts

@@ -8,6 +8,9 @@ services:
       dockerfile: deploy/tour27/Dockerfile
     image: tour27-osiris-gateway:local
     restart: unless-stopped
+    labels:
+      # In-memory cache and request budgets are per instance: see docs/tour27/PROVIDERS.md. Do not scale out.
+      tour27.scale: single-instance
     ports:
       - "127.0.0.1:${OSIRIS_PORT:-3000}:3000" # loopback only; expose through the reverse proxy
     environment:
