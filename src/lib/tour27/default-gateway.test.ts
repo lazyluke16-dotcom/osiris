@@ -8,7 +8,7 @@ const deps = (fetchImpl: ProviderDeps['fetch']): ProviderDeps => ({ fetch: fetch
 describe('default gateway wiring', () => {
   it('registers exactly the ported providers (kept in step as ports land)', () => {
     const gw = new DestinationIntelligenceGateway(buildDefaultProviders(deps(vi.fn() as any)), silentLogger);
-    expect([...gw.implemented()].sort()).toEqual(['ECCC', 'NWS']);
+    expect([...gw.implemented()].sort()).toEqual(['ECCC', 'MET_NORWAY', 'NASA_EONET', 'NASA_FIRMS', 'NWS', 'USGS']);
   });
 
   it('end to end through the gateway: Melbourne is outside both authorities WITHOUT any provider call', async () => {
